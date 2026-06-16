@@ -272,7 +272,7 @@ Entitas:
 - `SOURCE_CREATOR_RECORDS`
 
 Tujuan:
-- menyimpan asal data seperti FastMoss, Kalodata, atau import manual
+- menyimpan asal data seperti FastMoss atau import manual
 - memisahkan raw external data dari master affiliator internal
 - memudahkan re-sync, audit, dan troubleshooting konektor
 
@@ -337,7 +337,7 @@ Tujuan:
 
 ## Catatan Penting
 
-1. FastMoss diposisikan sebagai source utama phase 1, tetapi model tetap support Kalodata dan import manual.
+1. FastMoss diposisikan sebagai source utama phase 1, tetapi model tetap support import manual sebagai fallback.
 2. Contact data sebaiknya tidak diasumsikan selalu datang dari source external. Bisa jadi harus diisi atau diverifikasi internal.
 3. `SOURCE_CREATOR_RECORDS` tidak langsung dianggap master affiliator. Harus lewat proses mapping/dedupe ke `AFFILIATORS`.
 4. `ROI_REPORTS` harus dianggap estimasi kecuali di masa depan sudah ada actual commerce attribution yang valid.

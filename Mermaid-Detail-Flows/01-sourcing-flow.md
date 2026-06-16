@@ -6,13 +6,11 @@ Flow ini menjelaskan bagaimana sistem mendapatkan data affiliator dari source ex
 Pada phase 1:
 - **FastMoss** adalah source utama
 - **Import manual** tetap tersedia sebagai fallback
-- **Kalodata** dapat digunakan sebagai enrichment atau validasi tambahan bila dibutuhkan
 
 ## Fokus Flow
 Modul ini mencakup:
 - pengambilan data dari source
 - fallback import manual
-- enrichment optional
 - cleaning dan standardisasi data
 - dedupe dan mapping
 - pembentukan master affiliator internal
@@ -26,21 +24,16 @@ flowchart TD
 
     B -->|Primary| C[Ambil data dari FastMoss]
     B -->|Fallback| D[Import manual CSV atau spreadsheet]
-    B -->|Optional enrichment| E[Ambil data pembanding dari Kalodata]
 
     C --> F[Terima raw creator data]
     D --> F
-    E --> G[Data enrichment tambahan]
 
     F --> H[Validasi struktur data]
     H --> I{Field minimum lengkap?}
     I -->|No| J[Masuk exception queue untuk review manual]
     I -->|Yes| K[Standardisasi field]
 
-    G --> L[Mapping enrichment ke kandidat source]
     K --> M[Cleaning data]
-    L --> M
-
     M --> N[Dedupe creator record]
     N --> O{Sudah ada master affiliator?}
 
@@ -66,7 +59,6 @@ flowchart TD
 Sistem harus bisa menerima data dari beberapa jalur:
 - FastMoss sebagai jalur utama phase 1
 - import manual sebagai cadangan operasional
-- Kalodata sebagai enrichment atau pembanding bila diperlukan
 
 ### 2. Raw data intake
 Data dari source tidak langsung dipakai operasional. Semua data masuk terlebih dahulu sebagai raw source record.
@@ -94,13 +86,7 @@ Contoh:
 - username/profile URL disesuaikan
 - duplikasi format penulisan dikurangi
 
-### 5. Enrichment optional
-Jika Kalodata dipakai, datanya tidak menggantikan source utama, tetapi dipakai untuk:
-- validasi tambahan
-- insight pembanding
-- memperkuat confidence terhadap kandidat affiliator tertentu
-
-### 6. Dedupe dan mapping
+### 5. Dedupe dan mapping
 Setelah data bersih, sistem harus menjawab:
 - apakah ini affiliator baru?
 - atau sebenarnya affiliator yang sudah ada tapi muncul lagi dari source berbeda?
@@ -111,7 +97,7 @@ Di tahap ini, sistem bisa:
 
 Ini penting agar sistem tidak penuh duplikasi.
 
-### 7. Tagging, classification, dan scoring
+### 6. Tagging, classification, dan scoring
 Setelah affiliator berhasil dipetakan, sistem memberi:
 - tag
 - kategori
@@ -125,7 +111,7 @@ Contoh faktor scoring:
 - kecocokan dengan kategori produk
 - potensi ikut campaign
 
-### 8. Shortlist outcome
+### 7. Shortlist outcome
 Hasil akhir sourcing dibagi dua:
 - **candidate biasa** untuk arsip atau review lanjutan
 - **shortlist affiliator** untuk langsung masuk tahap listing dan outreach
@@ -157,8 +143,7 @@ Output utama dari modul ini:
 1. FastMoss API atau connector berubah
 2. Data source tidak lengkap atau tidak konsisten
 3. Duplikasi creator dari beberapa source
-4. Kalodata enrichment tidak selalu tersedia
-5. Manual import menghasilkan field yang tidak seragam
+4. Manual import menghasilkan field yang tidak seragam
 
 ## Catatan untuk Stakeholder
 Secara sederhana, modul sourcing adalah pintu masuk seluruh sistem. Kalau bagian ini kacau, maka listing, outreach, campaign assignment, dan reporting juga ikut kacau.

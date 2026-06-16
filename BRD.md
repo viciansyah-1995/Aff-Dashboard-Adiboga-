@@ -48,7 +48,6 @@ Affiliate Dashboard dibutuhkan untuk menyatukan semua tahapan tersebut dalam sat
 ### 4.1 In Scope
 1. **Affiliate sourcing management**
    - pengambilan data affiliator dari FastMoss sebagai source utama phase 1
-   - support optional enrichment dari Kalodata pada fase berikutnya atau validasi manual
    - support import/manual upload sebagai fallback bila connector external gagal atau belum tersedia
    - tagging affiliator berdasarkan spek tertentu
    - shortlist affiliator
@@ -118,7 +117,7 @@ Affiliate Dashboard dibutuhkan untuk menyatukan semua tahapan tersebut dalam sat
 ### 5.2 External
 - Affiliator / Creator
 - 3PL / Logistics Partner
-- Data provider seperti FastMoss dan Kalodata
+- Data provider seperti FastMoss
 
 ## 6. Aktor Sistem
 
@@ -161,7 +160,6 @@ Yang perlu dijelaskan lebih lanjut:
 - spek affiliator ditentukan berdasarkan apa saja? (follower, niche, engagement, lokasi, platform, audience fit)
 - data dari FastMoss diambil melalui API atau connector lain yang disepakati
 - import manual tetap tersedia sebagai fallback operasional
-- Kalodata dapat digunakan sebagai enrichment / pembanding bila dibutuhkan
 - apakah satu affiliator bisa punya multi-account?
 
 #### B. Listing & Qualification
@@ -359,18 +357,16 @@ Ini harus ditulis eksplisit agar manajemen tidak menganggap semua angka sebagai 
 
 ### 12.4 Risiko Integrasi
 - auth, rate limit, atau perubahan struktur source external dapat mengganggu ingestion
-- Kalodata mungkin belum tersedia sebagai connector di phase awal
 - fase awal mungkin tetap butuh semi-manual workflow pada beberapa titik
 
 ## 13. Asumsi Awal
 
 1. Data affiliator phase 1 berasal terutama dari FastMoss
 2. Sistem tetap mendukung import/manual upload sebagai fallback
-3. Kalodata dapat digunakan sebagai enrichment atau research support, bukan source utama phase 1
-4. Approach dilakukan oleh tim internal dengan bantuan AI untuk draft/personalization
-5. Affiliator memiliki akun portal sendiri
-6. Sample fulfillment dapat dijalankan semi-manual lebih dulu dengan input resi manual
-7. ROI pada fase awal adalah **estimasi ROI**, bukan full audited ROI
+3. Approach dilakukan oleh tim internal dengan bantuan AI untuk draft/personalization
+4. Affiliator memiliki akun portal sendiri
+5. Sample fulfillment dapat dijalankan semi-manual lebih dulu dengan input resi manual
+6. ROI pada fase awal adalah **estimasi ROI**, bukan full audited ROI
 
 ## 14. Rekomendasi Struktur Modul Sistem
 
@@ -383,7 +379,6 @@ Ini harus ditulis eksplisit agar manajemen tidak menganggap semua angka sebagai 
 7. **Point & Reward Module**
 8. **Analytics & Reporting Module**
 
-
 ## 15. Struktur Model Sistem untuk Stakeholder
 
 Bagian ini dibuat agar stakeholder non-teknis bisa memahami bentuk sistem secara utuh sebelum masuk ke flow detail, PRD, atau desain UI.
@@ -392,7 +387,7 @@ Bagian ini dibuat agar stakeholder non-teknis bisa memahami bentuk sistem secara
 Secara sederhana, sistem Affiliate Dashboard (Adiboga) dibagi menjadi 6 lapisan kerja:
 
 1. **Lapisan Sumber Data**
-   Sistem mengambil data awal affiliator dari FastMoss sebagai source utama. Jika dibutuhkan, data bisa diperkaya dari Kalodata atau dimasukkan lewat import manual sebagai fallback.
+   Sistem mengambil data awal affiliator dari FastMoss sebagai source utama. Jika connector tidak tersedia atau gagal, data bisa dimasukkan lewat import manual sebagai fallback.
 
 2. **Lapisan Master Data Affiliator**
    Semua data affiliator yang sudah lolos proses mapping dan dedupe akan disimpan sebagai master data internal. Ini penting supaya tim tidak bekerja langsung di atas data mentah dari source luar.
@@ -413,7 +408,7 @@ Secara sederhana, sistem Affiliate Dashboard (Adiboga) dibagi menjadi 6 lapisan 
 Agar lebih mudah dipahami, sistem ini bisa dibayangkan seperti rantai proses berikut:
 
 - **Source masuk**
-  FastMoss, Kalodata, atau import manual memberikan data awal affiliator.
+  FastMoss atau import manual memberikan data awal affiliator.
 
 - **Data dibersihkan dan disusun**
   Sistem memilih, merapikan, dan menyatukan data agar menjadi master affiliator yang bisa dipakai tim internal.
@@ -531,7 +526,7 @@ Jika dilihat dari sudut pandang manajemen, tiap lapisan punya fungsi strategis b
 Ada beberapa prinsip yang perlu dipahami stakeholder sejak awal:
 
 1. **Data source external tidak sama dengan master data internal**
-   Data dari FastMoss atau Kalodata belum otomatis menjadi data final. Data itu masih perlu dipilih, dicocokkan, dan dirapikan.
+   Data dari FastMoss belum otomatis menjadi data final. Data itu masih perlu dipilih, dicocokkan, dan dirapikan.
 
 2. **Sistem ini bukan hanya dashboard reporting**
    Sistem ini adalah mesin operasional dari sourcing sampai reporting.
@@ -563,7 +558,6 @@ Bagian ini menunjukkan alur global sistem Affiliate Dashboard (Adiboga) dari sou
 flowchart TD
     A[FastMoss sebagai source utama phase 1] --> B[Ingestion dan sinkronisasi data affiliator]
     A2[Import manual sebagai fallback] --> B
-    A3[Kalodata sebagai enrichment opsional] --> B
 
     B --> C[Cleaning, dedupe, mapping, dan master affiliator]
     C --> D[Listing, tagging, qualification, dan shortlist affiliator]
@@ -596,13 +590,14 @@ flowchart TD
 
 ### Penjelasan Singkat Flow
 
-1. Data affiliator masuk dari FastMoss sebagai jalur utama. Import manual tetap tersedia sebagai fallback, dan Kalodata dapat dipakai sebagai enrichment.
+1. Data affiliator masuk dari FastMoss sebagai jalur utama. Import manual tetap tersedia sebagai fallback.
 2. Data mentah tidak langsung dipakai. Sistem harus melakukan cleaning, dedupe, mapping, lalu membentuk master affiliator internal.
 3. Setelah itu tim melakukan listing, qualification, dan outreach dengan kombinasi AI dan human.
 4. Affiliator yang tertarik akan masuk ke portal, memilih campaign, lalu menunggu approval.
 5. Bila campaign membutuhkan sample, proses fulfillment dan 3PL akan berjalan sebelum affiliator membuat konten.
 6. Setelah konten diposting, affiliator submit link, tim review submission, lalu sistem menangkap performa konten.
 7. Dari performa tersebut sistem menghitung point, menyusun reporting, dan menghasilkan estimasi ROI.
+
 ## 17. Prioritas MVP yang Disarankan
 
 ### Phase 1
@@ -618,7 +613,6 @@ flowchart TD
 - shipment tracking
 - content submission
 - approval workflow
-- optional Kalodata enrichment
 
 ### Phase 3
 - point engine
@@ -649,5 +643,3 @@ Titik paling penting yang harus dijaga sejak awal:
 - kejelasan bahwa ROI awal adalah estimasi
 
 Jika fondasi ini rapi, sistem bisa berkembang dari sekadar dashboard operasional menjadi mesin affiliate ops yang scalable.
-
-
