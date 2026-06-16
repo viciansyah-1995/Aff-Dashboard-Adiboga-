@@ -554,7 +554,56 @@ Jika dijelaskan secara sederhana, Affiliate Dashboard (Adiboga) adalah sistem ya
 - hitung performa dan estimasi hasil bisnis
 
 Dengan struktur ini, stakeholder bisa melihat bahwa sistem bukan hanya alat tracking, tetapi fondasi operasional affiliate management end-to-end.
-## 16. Prioritas MVP yang Disarankan
+
+## 16. Mermaid Flow Global
+
+Bagian ini menunjukkan alur global sistem Affiliate Dashboard (Adiboga) dari source data sampai reporting. Diagram ini ditujukan untuk membantu stakeholder memahami hubungan antar modul utama secara visual.
+
+```mermaid
+flowchart TD
+    A[FastMoss sebagai source utama phase 1] --> B[Ingestion dan sinkronisasi data affiliator]
+    A2[Import manual sebagai fallback] --> B
+    A3[Kalodata sebagai enrichment opsional] --> B
+
+    B --> C[Cleaning, dedupe, mapping, dan master affiliator]
+    C --> D[Listing, tagging, qualification, dan shortlist affiliator]
+    D --> E[Outreach pipeline oleh AI + human]
+
+    E --> F{Affiliator tertarik?}
+    F -->|No| G[Follow-up lanjutan atau arsip pipeline]
+    F -->|Yes| H[Portal invitation dan affiliator login]
+
+    H --> I[Affiliator melihat campaign atau SoW]
+    I --> J[Affiliator memilih campaign]
+    J --> K[Brand review dan approve participation]
+
+    K --> L{Perlu sample produk?}
+    L -->|No| M[Affiliator lanjut produksi konten]
+    L -->|Yes| N[Request sample]
+    N --> O[Ops proses fulfillment]
+    O --> P[Pengiriman via 3PL]
+    P --> Q[Sample delivered]
+    Q --> M
+
+    M --> R[Affiliator submit link posting]
+    R --> S[Review submission dan validasi SoW]
+    S --> T[Capture performa konten]
+    T --> U[Hitung point affiliator]
+    T --> V[Compile reporting campaign]
+    U --> V
+    V --> W[Estimasi ROI dan dashboard management]
+```
+
+### Penjelasan Singkat Flow
+
+1. Data affiliator masuk dari FastMoss sebagai jalur utama. Import manual tetap tersedia sebagai fallback, dan Kalodata dapat dipakai sebagai enrichment.
+2. Data mentah tidak langsung dipakai. Sistem harus melakukan cleaning, dedupe, mapping, lalu membentuk master affiliator internal.
+3. Setelah itu tim melakukan listing, qualification, dan outreach dengan kombinasi AI dan human.
+4. Affiliator yang tertarik akan masuk ke portal, memilih campaign, lalu menunggu approval.
+5. Bila campaign membutuhkan sample, proses fulfillment dan 3PL akan berjalan sebelum affiliator membuat konten.
+6. Setelah konten diposting, affiliator submit link, tim review submission, lalu sistem menangkap performa konten.
+7. Dari performa tersebut sistem menghitung point, menyusun reporting, dan menghasilkan estimasi ROI.
+## 17. Prioritas MVP yang Disarankan
 
 ### Phase 1
 - FastMoss connector / source ingestion
@@ -578,7 +627,7 @@ Dengan struktur ini, stakeholder bisa melihat bahwa sistem bukan hanya alat trac
 - executive reporting
 - multi-source scoring and enrichment
 
-## 17. Keputusan Penting Sebelum Masuk Desain Sistem
+## 18. Keputusan Penting Sebelum Masuk Desain Sistem
 
 Sebelum lanjut ke PRD / wireframe / arsitektur teknis, ada beberapa hal yang perlu difinalkan:
 1. definisi field data affiliator minimum dari FastMoss dan fallback import
@@ -588,7 +637,7 @@ Sebelum lanjut ke PRD / wireframe / arsitektur teknis, ada beberapa hal yang per
 5. rumus estimasi ROI yang disepakati
 6. metode ingestion source external yang disetujui untuk phase awal
 
-## 18. Kesimpulan
+## 19. Kesimpulan
 
 Secara bisnis, flow yang diberikan sudah cukup solid untuk dijadikan fondasi sistem. Nilai utama Affiliate Dashboard ini ada pada kemampuannya menghubungkan proses yang biasanya tercecer menjadi satu operational pipeline yang bisa dipantau ujung ke ujung.
 
@@ -600,4 +649,5 @@ Titik paling penting yang harus dijaga sejak awal:
 - kejelasan bahwa ROI awal adalah estimasi
 
 Jika fondasi ini rapi, sistem bisa berkembang dari sekadar dashboard operasional menjadi mesin affiliate ops yang scalable.
+
 
