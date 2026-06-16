@@ -1,11 +1,11 @@
-# BRD — Affiliate Dashboard (Adiboga)
+# BRD - Affiliate Dashboard (Adiboga)
 
 ## 1. Ringkasan Eksekutif
 
 Affiliate Dashboard (Adiboga) adalah sistem end-to-end untuk mengelola proses affiliate marketing dari tahap sourcing affiliator sampai reporting performa campaign. Sistem ini dirancang agar brand dapat menjalankan workflow yang lebih terstruktur, terukur, dan scalable, tanpa bergantung penuh pada tracking manual di spreadsheet atau chat.
 
 Flow bisnis utama yang saat ini sudah teridentifikasi:
-1. Mencari affiliator sesuai spek dari Kalodata
+1. Mencari affiliator sesuai spek dengan FastMoss sebagai source utama phase 1
 2. Menyusun listing data affiliator
 3. Melakukan approach ke affiliator dengan kombinasi AI dan human
 4. Affiliator login ke portal
@@ -14,8 +14,6 @@ Flow bisnis utama yang saat ini sudah teridentifikasi:
 7. Setelah produk diterima, affiliator membuat konten sesuai SoW
 8. Affiliator submit/update link posting ke portal dan mendapatkan point
 9. Sistem meng-compile reporting dan menghitung estimasi ROI otomatis
-
----
 
 ## 2. Latar Belakang
 
@@ -27,8 +25,6 @@ Proses affiliate marketing biasanya tersebar di banyak tools: sourcing di platfo
 - reporting ROI lambat dan rawan bias asumsi
 
 Affiliate Dashboard dibutuhkan untuk menyatukan semua tahapan tersebut dalam satu sistem operasional yang lebih rapi.
-
----
 
 ## 3. Tujuan Bisnis
 
@@ -47,13 +43,13 @@ Affiliate Dashboard dibutuhkan untuk menyatukan semua tahapan tersebut dalam sat
 - point/reward affiliator bisa dihitung sistematis
 - reporting estimasi ROI lebih cepat tersedia
 
----
-
 ## 4. Ruang Lingkup
 
 ### 4.1 In Scope
 1. **Affiliate sourcing management**
-   - input/import data affiliator dari Kalodata
+   - pengambilan data affiliator dari FastMoss sebagai source utama phase 1
+   - support optional enrichment dari Kalodata pada fase berikutnya atau validasi manual
+   - support import/manual upload sebagai fallback bila connector external gagal atau belum tersedia
    - tagging affiliator berdasarkan spek tertentu
    - shortlist affiliator
 
@@ -109,8 +105,6 @@ Affiliate Dashboard dibutuhkan untuk menyatukan semua tahapan tersebut dalam sat
 - advanced fraud detection berbasis machine learning
 - attribution model multi-touch yang kompleks
 
----
-
 ## 5. Stakeholder
 
 ### 5.1 Internal
@@ -124,9 +118,7 @@ Affiliate Dashboard dibutuhkan untuk menyatukan semua tahapan tersebut dalam sat
 ### 5.2 External
 - Affiliator / Creator
 - 3PL / Logistics Partner
-- Data provider seperti Kalodata
-
----
+- Data provider seperti FastMoss dan Kalodata
 
 ## 6. Aktor Sistem
 
@@ -148,12 +140,10 @@ Affiliate Dashboard dibutuhkan untuk menyatukan semua tahapan tersebut dalam sat
 6. **Management**
    - melihat dashboard dan reporting eksekutif
 
----
-
 ## 7. Analisa Flow Bisnis
 
 ### 7.1 Flow Besar yang Sudah Diberikan
-- Cari affiliator sesuai spek di Kalodata
+- Cari affiliator sesuai spek dari source utama FastMoss
 - Listing data affiliate
 - Affiliator di-approach dengan AI + human
 - Affiliator login portal
@@ -169,7 +159,9 @@ Flow di atas sudah kuat sebagai high-level process, tetapi secara sistem masih p
 #### A. Sourcing
 Yang perlu dijelaskan lebih lanjut:
 - spek affiliator ditentukan berdasarkan apa saja? (follower, niche, engagement, lokasi, platform, audience fit)
-- data dari Kalodata akan diinput manual, CSV import, atau API?
+- data dari FastMoss diambil melalui API atau connector lain yang disepakati
+- import manual tetap tersedia sebagai fallback operasional
+- Kalodata dapat digunakan sebagai enrichment / pembanding bila dibutuhkan
 - apakah satu affiliator bisa punya multi-account?
 
 #### B. Listing & Qualification
@@ -245,13 +237,12 @@ Artinya sistem kemungkinan belum memiliki real closed-loop sales attribution pen
 
 Ini harus ditulis eksplisit agar manajemen tidak menganggap semua angka sebagai angka final akuntansi.
 
----
-
 ## 8. Kebutuhan Fungsional
 
 ### 8.1 Modul Sourcing Affiliator
-- sistem dapat menyimpan data affiliator hasil sourcing dari Kalodata
-- sistem mendukung import data affiliator
+- sistem dapat mengambil dan menyimpan data affiliator dari FastMoss sebagai source utama phase 1
+- sistem mendukung import data affiliator sebagai fallback
+- sistem dapat menandai asal source data untuk tiap record
 - sistem mendukung tagging dan filtering affiliator
 - sistem mendukung shortlist affiliator
 
@@ -259,6 +250,7 @@ Ini harus ditulis eksplisit agar manajemen tidak menganggap semua angka sebagai 
 - sistem menyimpan profil affiliator
 - sistem menyimpan atribut seperti platform, niche, lokasi, follower, engagement, notes
 - sistem menampilkan histori status affiliator
+- sistem dapat memetakan satu affiliator ke lebih dari satu akun/platform bila diperlukan
 
 ### 8.3 Modul Outreach Pipeline
 - sistem mendukung pembuatan outreach task
@@ -302,8 +294,6 @@ Ini harus ditulis eksplisit agar manajemen tidak menganggap semua angka sebagai 
 - sistem menghitung estimasi ROI
 - sistem mendukung export report
 
----
-
 ## 9. Kebutuhan Non-Fungsional
 
 - role-based access control
@@ -312,23 +302,21 @@ Ini harus ditulis eksplisit agar manajemen tidak menganggap semua angka sebagai 
 - dashboard cukup responsif untuk desktop operations
 - struktur data siap dikembangkan ke integrasi API di masa depan
 - sistem harus bisa menangani data affiliator dalam volume menengah-besar
-
----
+- sistem harus bisa membedakan external source data dan master affiliator internal
 
 ## 10. User Stories
 
-1. Sebagai Affiliate Manager, saya ingin mengimpor data affiliator dari Kalodata agar tim bisa mulai melakukan shortlist lebih cepat.
-2. Sebagai Outreach Team, saya ingin melihat status approach tiap affiliator agar follow-up tidak tercecer.
-3. Sebagai Outreach Team, saya ingin mendapatkan draft pesan dari AI agar personalisasi outreach lebih cepat.
-4. Sebagai Affiliator, saya ingin login ke portal agar bisa melihat campaign yang tersedia.
-5. Sebagai Affiliator, saya ingin memilih SoW yang ingin saya ikuti agar bisa mengikuti campaign yang relevan.
-6. Sebagai Ops Team, saya ingin melihat request sample agar bisa memproses pengiriman tepat waktu.
-7. Sebagai Ops Team, saya ingin menginput tracking 3PL agar status kiriman bisa dipantau.
-8. Sebagai Affiliator, saya ingin submit link posting agar submission saya tercatat dan bisa dinilai.
-9. Sebagai Sistem, saya ingin menghitung point affiliator berdasarkan rule campaign agar reward logic konsisten.
-10. Sebagai Management, saya ingin melihat estimasi ROI per campaign agar bisa menilai efektivitas program affiliate.
-
----
+1. Sebagai Affiliate Manager, saya ingin mengambil data affiliator dari FastMoss agar tim bisa mulai melakukan shortlist lebih cepat.
+2. Sebagai Affiliate Manager, saya ingin tetap bisa import data affiliator secara manual agar operasional tetap berjalan jika connector external bermasalah.
+3. Sebagai Outreach Team, saya ingin melihat status approach tiap affiliator agar follow-up tidak tercecer.
+4. Sebagai Outreach Team, saya ingin mendapatkan draft pesan dari AI agar personalisasi outreach lebih cepat.
+5. Sebagai Affiliator, saya ingin login ke portal agar bisa melihat campaign yang tersedia.
+6. Sebagai Affiliator, saya ingin memilih SoW yang ingin saya ikuti agar bisa mengikuti campaign yang relevan.
+7. Sebagai Ops Team, saya ingin melihat request sample agar bisa memproses pengiriman tepat waktu.
+8. Sebagai Ops Team, saya ingin menginput tracking 3PL agar status kiriman bisa dipantau.
+9. Sebagai Affiliator, saya ingin submit link posting agar submission saya tercatat dan bisa dinilai.
+10. Sebagai Sistem, saya ingin menghitung point affiliator berdasarkan rule campaign agar reward logic konsisten.
+11. Sebagai Management, saya ingin melihat estimasi ROI per campaign agar bisa menilai efektivitas program affiliate.
 
 ## 11. KPI dan Success Metrics
 
@@ -352,14 +340,13 @@ Ini harus ditulis eksplisit agar manajemen tidak menganggap semua angka sebagai 
 - estimated ROI
 - cost per activated affiliator
 
----
-
 ## 12. Risiko dan Catatan Penting
 
 ### 12.1 Risiko Data
-- data Kalodata mungkin tidak selalu sinkron / lengkap
+- data FastMoss atau source external lain mungkin tidak selalu lengkap
 - kemungkinan duplikasi affiliator
 - kemungkinan multi-account creator
+- field dari source external bisa berubah sewaktu-waktu
 
 ### 12.2 Risiko Operasional
 - affiliator tidak responsif setelah diapproach
@@ -371,21 +358,19 @@ Ini harus ditulis eksplisit agar manajemen tidak menganggap semua angka sebagai 
 - jika asumsi CPM / cost rate / estimasi NMV tidak distandarkan, reporting bisa bias
 
 ### 12.4 Risiko Integrasi
-- integrasi ke Kalodata dan 3PL mungkin tidak tersedia sejak fase awal
-- fase awal mungkin perlu semi-manual workflow
-
----
+- auth, rate limit, atau perubahan struktur source external dapat mengganggu ingestion
+- Kalodata mungkin belum tersedia sebagai connector di phase awal
+- fase awal mungkin tetap butuh semi-manual workflow pada beberapa titik
 
 ## 13. Asumsi Awal
 
-1. Data affiliator awal berasal dari Kalodata
-2. Sistem versi awal boleh menggunakan import/manual upload bila API belum tersedia
-3. Approach dilakukan oleh tim internal dengan bantuan AI untuk draft/personalization
-4. Affiliator memiliki akun portal sendiri
-5. Sample fulfillment dapat dijalankan semi-manual lebih dulu dengan input resi manual
-6. ROI pada fase awal adalah **estimasi ROI**, bukan full audited ROI
-
----
+1. Data affiliator phase 1 berasal terutama dari FastMoss
+2. Sistem tetap mendukung import/manual upload sebagai fallback
+3. Kalodata dapat digunakan sebagai enrichment atau research support, bukan source utama phase 1
+4. Approach dilakukan oleh tim internal dengan bantuan AI untuk draft/personalization
+5. Affiliator memiliki akun portal sendiri
+6. Sample fulfillment dapat dijalankan semi-manual lebih dulu dengan input resi manual
+7. ROI pada fase awal adalah **estimasi ROI**, bukan full audited ROI
 
 ## 14. Rekomendasi Struktur Modul Sistem
 
@@ -398,42 +383,39 @@ Ini harus ditulis eksplisit agar manajemen tidak menganggap semua angka sebagai 
 7. **Point & Reward Module**
 8. **Analytics & Reporting Module**
 
----
-
 ## 15. Prioritas MVP yang Disarankan
 
-### Phase 1 — Operational Foundation
-- import affiliator
+### Phase 1
+- FastMoss connector / source ingestion
+- import affiliator sebagai fallback
 - affiliate listing
 - outreach pipeline
 - campaign / SoW setup
 - portal login basic
 
-### Phase 2 — Fulfillment & Submission
+### Phase 2
 - request sample
 - shipment tracking
 - content submission
 - approval workflow
+- optional Kalodata enrichment
 
-### Phase 3 — Intelligence & Reporting
+### Phase 3
 - point engine
 - ROI estimation dashboard
 - AI-assisted outreach enhancement
 - executive reporting
-
----
+- multi-source scoring and enrichment
 
 ## 16. Keputusan Penting Sebelum Masuk Desain Sistem
 
 Sebelum lanjut ke PRD / wireframe / arsitektur teknis, ada beberapa hal yang perlu difinalkan:
-1. definisi field data affiliator minimum
+1. definisi field data affiliator minimum dari FastMoss dan fallback import
 2. status pipeline resmi affiliator
 3. rule point resmi
 4. definisi SoW/campaign structure
 5. rumus estimasi ROI yang disepakati
-6. apakah sourcing dan 3PL fase awal manual, import, atau API
-
----
+6. metode ingestion source external yang disetujui untuk phase awal
 
 ## 17. Kesimpulan
 
@@ -442,6 +424,7 @@ Secara bisnis, flow yang diberikan sudah cukup solid untuk dijadikan fondasi sis
 Titik paling penting yang harus dijaga sejak awal:
 - standardisasi status
 - kualitas data affiliator
+- pemisahan data source external dan master data internal
 - disiplin tracking sample dan submission
 - kejelasan bahwa ROI awal adalah estimasi
 
