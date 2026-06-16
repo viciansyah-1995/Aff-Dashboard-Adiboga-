@@ -383,7 +383,178 @@ Ini harus ditulis eksplisit agar manajemen tidak menganggap semua angka sebagai 
 7. **Point & Reward Module**
 8. **Analytics & Reporting Module**
 
-## 15. Prioritas MVP yang Disarankan
+
+## 15. Struktur Model Sistem untuk Stakeholder
+
+Bagian ini dibuat agar stakeholder non-teknis bisa memahami bentuk sistem secara utuh sebelum masuk ke flow detail, PRD, atau desain UI.
+
+### 15.1 Gambaran Besar
+Secara sederhana, sistem Affiliate Dashboard (Adiboga) dibagi menjadi 6 lapisan kerja:
+
+1. **Lapisan Sumber Data**
+   Sistem mengambil data awal affiliator dari FastMoss sebagai source utama. Jika dibutuhkan, data bisa diperkaya dari Kalodata atau dimasukkan lewat import manual sebagai fallback.
+
+2. **Lapisan Master Data Affiliator**
+   Semua data affiliator yang sudah lolos proses mapping dan dedupe akan disimpan sebagai master data internal. Ini penting supaya tim tidak bekerja langsung di atas data mentah dari source luar.
+
+3. **Lapisan Outreach dan Relationship Management**
+   Setelah affiliator masuk shortlist, tim bisa melakukan approach, follow-up, dan mencatat hasil komunikasi. AI membantu drafting pesan, tetapi keputusan dan eksekusi tetap dipegang human.
+
+4. **Lapisan Campaign dan Portal Affiliator**
+   Di lapisan ini brand membuat campaign atau SoW, lalu affiliator yang terundang atau eligible bisa login ke portal, melihat campaign, dan memilih partisipasi.
+
+5. **Lapisan Operasional Fulfillment dan Submission**
+   Setelah affiliator join campaign, proses request sample, pengiriman via 3PL, dan submit link konten dikelola di lapisan ini.
+
+6. **Lapisan Point, Performance, dan Reporting**
+   Setelah konten terkirim, sistem mengumpulkan performa, menghitung point, dan menyusun reporting termasuk estimasi ROI.
+
+### 15.2 Cara Stakeholder Melihat Sistem
+Agar lebih mudah dipahami, sistem ini bisa dibayangkan seperti rantai proses berikut:
+
+- **Source masuk**
+  FastMoss, Kalodata, atau import manual memberikan data awal affiliator.
+
+- **Data dibersihkan dan disusun**
+  Sistem memilih, merapikan, dan menyatukan data agar menjadi master affiliator yang bisa dipakai tim internal.
+
+- **Tim mulai approach**
+  Tim outreach menggunakan data tersebut untuk pendekatan, dibantu AI untuk drafting pesan.
+
+- **Affiliator masuk ke campaign**
+  Affiliator yang tertarik bisa login ke portal dan memilih campaign yang ingin diikuti.
+
+- **Operasional campaign berjalan**
+  Sample dikirim, konten dibuat, link posting dikumpulkan.
+
+- **Hasil diukur**
+  Sistem menghitung point, performa, dan estimasi hasil bisnis.
+
+### 15.3 Modul Sistem yang Dilihat dari Sudut Pandang Bisnis
+Berikut struktur sistem jika dijelaskan dalam bahasa bisnis:
+
+#### A. Modul Sourcing Affiliator
+Fungsi:
+- mengambil data affiliator dari source luar
+- mendukung pencarian affiliator sesuai spek
+- menjadi pintu masuk calon affiliator baru
+
+Output utama:
+- daftar calon affiliator yang relevan
+
+#### B. Modul Master Listing dan Qualification
+Fungsi:
+- menyimpan affiliator yang sudah lolos seleksi awal
+- memberi tag, status, dan segmentasi
+- menjaga agar data affiliator rapi dan tidak duplikat
+
+Output utama:
+- database affiliator internal yang siap dipakai tim
+
+#### C. Modul Outreach dan CRM Affiliate
+Fungsi:
+- mencatat proses pendekatan
+- melacak status follow-up
+- membantu tim membangun relationship dengan affiliator
+
+Output utama:
+- pipeline affiliator dari belum dihubungi sampai aktif join campaign
+
+#### D. Modul Campaign / SoW Management
+Fungsi:
+- membuat campaign
+- mengatur deliverable, requirement, kuota, dan rule point
+- menjadi pusat pengaturan program affiliate
+
+Output utama:
+- campaign yang siap dijalankan dan dipilih affiliator
+
+#### E. Modul Portal Affiliator
+Fungsi:
+- menjadi tempat affiliator login
+- melihat campaign yang tersedia
+- mengajukan partisipasi
+- submit progress dan link konten
+
+Output utama:
+- interaksi affiliator dengan brand yang lebih terstruktur
+
+#### F. Modul Sample Fulfillment
+Fungsi:
+- memproses request sample
+- melacak pengiriman
+- menghubungkan campaign dengan operasional 3PL
+
+Output utama:
+- status sample dari request sampai delivered
+
+#### G. Modul Submission dan Performance
+Fungsi:
+- menyimpan link konten
+- review kesesuaian konten dengan SoW
+- mengumpulkan performa konten
+
+Output utama:
+- data performa per affiliator dan per campaign
+
+#### H. Modul Point dan Reporting
+Fungsi:
+- menghitung point affiliator
+- menyusun dashboard performa
+- menyusun estimasi ROI
+
+Output utama:
+- laporan performa dan insight pengambilan keputusan
+
+### 15.4 Nilai Strategis Tiap Lapisan
+Jika dilihat dari sudut pandang manajemen, tiap lapisan punya fungsi strategis berbeda:
+
+- **Sourcing Layer**
+  Menjawab pertanyaan: kita mau cari affiliator dari mana?
+
+- **Master Data Layer**
+  Menjawab pertanyaan: siapa affiliator yang benar-benar menjadi aset data internal kita?
+
+- **Outreach Layer**
+  Menjawab pertanyaan: siapa yang sudah dihubungi, tertarik, atau siap diaktifkan?
+
+- **Campaign Layer**
+  Menjawab pertanyaan: program apa yang sedang ditawarkan ke affiliator?
+
+- **Fulfillment & Submission Layer**
+  Menjawab pertanyaan: apakah campaign berjalan sesuai rencana secara operasional?
+
+- **Reporting Layer**
+  Menjawab pertanyaan: campaign ini menghasilkan value atau tidak?
+
+### 15.5 Prinsip Penting dalam Struktur Model Sistem
+Ada beberapa prinsip yang perlu dipahami stakeholder sejak awal:
+
+1. **Data source external tidak sama dengan master data internal**
+   Data dari FastMoss atau Kalodata belum otomatis menjadi data final. Data itu masih perlu dipilih, dicocokkan, dan dirapikan.
+
+2. **Sistem ini bukan hanya dashboard reporting**
+   Sistem ini adalah mesin operasional dari sourcing sampai reporting.
+
+3. **Import manual tetap dipertahankan untuk keamanan operasional**
+   Walaupun FastMoss menjadi source utama phase 1, fallback tetap penting jika connector bermasalah.
+
+4. **ROI awal bersifat estimasi**
+   Dashboard tidak boleh langsung dianggap sebagai laporan keuangan final tanpa fondasi atribusi yang kuat.
+
+### 15.6 Kesimpulan untuk Stakeholder
+Jika dijelaskan secara sederhana, Affiliate Dashboard (Adiboga) adalah sistem yang mengubah proses affiliate marketing dari kerja manual yang tersebar menjadi alur kerja terpadu:
+
+- cari affiliator
+- pilih affiliator yang cocok
+- approach affiliator
+- jalankan campaign
+- kirim sample
+- kumpulkan hasil konten
+- hitung performa dan estimasi hasil bisnis
+
+Dengan struktur ini, stakeholder bisa melihat bahwa sistem bukan hanya alat tracking, tetapi fondasi operasional affiliate management end-to-end.
+## 16. Prioritas MVP yang Disarankan
 
 ### Phase 1
 - FastMoss connector / source ingestion
@@ -407,7 +578,7 @@ Ini harus ditulis eksplisit agar manajemen tidak menganggap semua angka sebagai 
 - executive reporting
 - multi-source scoring and enrichment
 
-## 16. Keputusan Penting Sebelum Masuk Desain Sistem
+## 17. Keputusan Penting Sebelum Masuk Desain Sistem
 
 Sebelum lanjut ke PRD / wireframe / arsitektur teknis, ada beberapa hal yang perlu difinalkan:
 1. definisi field data affiliator minimum dari FastMoss dan fallback import
@@ -417,7 +588,7 @@ Sebelum lanjut ke PRD / wireframe / arsitektur teknis, ada beberapa hal yang per
 5. rumus estimasi ROI yang disepakati
 6. metode ingestion source external yang disetujui untuk phase awal
 
-## 17. Kesimpulan
+## 18. Kesimpulan
 
 Secara bisnis, flow yang diberikan sudah cukup solid untuk dijadikan fondasi sistem. Nilai utama Affiliate Dashboard ini ada pada kemampuannya menghubungkan proses yang biasanya tercecer menjadi satu operational pipeline yang bisa dipantau ujung ke ujung.
 
@@ -429,3 +600,4 @@ Titik paling penting yang harus dijaga sejak awal:
 - kejelasan bahwa ROI awal adalah estimasi
 
 Jika fondasi ini rapi, sistem bisa berkembang dari sekadar dashboard operasional menjadi mesin affiliate ops yang scalable.
+
