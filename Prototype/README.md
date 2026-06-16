@@ -1,16 +1,25 @@
 # Prototype
 
-Folder ini berisi prototype HTML untuk memvisualisasikan Affiliate Dashboard (Adiboga) berdasarkan flow dan blueprint yang sudah dibuat.
+Folder ini berisi prototype modular HTML untuk memvisualisasikan Affiliate Dashboard (Adiboga) berdasarkan flow dan blueprint yang sudah dibuat.
 
-Tujuan prototype:
-- memvisualisasikan alur sistem secara lebih konkret
-- membantu stakeholder memahami modul dan hubungan antar proses
-- menjadi dasar diskusi UI/UX sebelum masuk implementasi frontend final
+## Tujuan prototype
+- memvisualisasikan sistem secara lebih konkret
+- membantu stakeholder memahami hubungan antar modul
+- menjadi dasar diskusi UI/UX sebelum implementasi final
 
-File utama:
-- `index.html`
+## Struktur
+- `index.html` → overview sistem
+- `pages/source-master.html` → source ingestion & master affiliator
+- `pages/outreach.html` → outreach pipeline
+- `pages/campaign-portal.html` → campaign & portal affiliator
+- `pages/fulfillment.html` → sample fulfillment
+- `pages/submission.html` → content submission
+- `pages/reporting.html` → point & reporting
+- `assets/css/styles.css` → style global clean minimalis
+- `assets/js/app.js` → interaksi ringan dan active navigation
 
-Catatan:
+## Catatan
 - prototype ini masih static HTML
-- fokus utamanya adalah visualisasi dashboard, portal, dan operational flow
+- desain sengaja dibuat clean, minimalis, dan internal-system friendly
+- setiap halaman saling berelasi melalui navigasi klik
 - belum terhubung ke backend atau data real

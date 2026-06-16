@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Source & Master Data</title>
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-kicker">Module</div><h1>Source &<br>Master Data</h1><p>Input data affiliator yang dibentuk menjadi aset internal.</p></div>
+      <div class="nav-block"><div class="nav-title">Navigation</div><a class="nav-link" data-nav href="../index.html">System Overview</a><a class="nav-link" data-nav href="source-master.html">Source & Master Data</a><a class="nav-link" data-nav href="outreach.html">Outreach Pipeline</a><a class="nav-link" data-nav href="campaign-portal.html">Campaign & Portal</a><a class="nav-link" data-nav href="fulfillment.html">Sample Fulfillment</a><a class="nav-link" data-nav href="submission.html">Content Submission</a><a class="nav-link" data-nav href="reporting.html">Point & Reporting</a></div>
+    </aside>
+    <main class="main">
+      <div class="page-header"><div><div class="eyebrow">Layer 01–02</div><h2>Data masuk dari source, lalu dirapikan menjadi master affiliator yang siap dipakai tim.</h2><p>Modul ini memegang fondasi kualitas data. Kalau bagian ini berantakan, outreach, campaign, dan reporting akan ikut bermasalah.</p></div><div class="badge">Primary: FastMoss</div></div>
+      <div class="grid-2">
+        <div class="screen"><div class="screen-top"><span>Source Intake</span><span>FastMoss / Manual Import</span></div><div class="screen-body"><div class="panel"><strong>Raw Source Records</strong><span>Data creator disimpan mentah untuk audit, re-sync, dan troubleshooting.</span></div><div class="panel"><strong>Validation Layer</strong><span>Field minimum dicek sebelum data masuk ke sistem inti.</span></div><div class="panel"><strong>Exception Queue</strong><span>Data yang tidak lengkap ditahan untuk review manual.</span></div></div></div>
+        <div class="screen"><div class="screen-top"><span>Master Builder</span><span>Internal Asset</span></div><div class="screen-body"><div class="panel"><strong>Dedupe & Mapping</strong><span>Creator dicek apakah sudah ada di master atau perlu dibuat record baru.</span></div><div class="panel"><strong>Accounts & Contacts</strong><span>Satu affiliator bisa punya beberapa akun dan contact internal.</span></div><div class="panel"><strong>Qualification Status</strong><span>Tag, segmentasi, dan qualification status disimpan untuk modul selanjutnya.</span></div></div></div>
+      </div>
+      <div class="timeline" style="margin-top:22px;">
+        <div class="timeline-item"><div class="timeline-step">Step 01</div><div class="timeline-content"><h4>Ingestion</h4><p>Ambil data dari FastMoss atau import manual. Semua data disimpan dulu sebagai raw source records.</p><div class="chips"><span class="chip">FastMoss connector</span><span class="chip">Fallback import</span></div></div></div>
+        <div class="timeline-item"><div class="timeline-step">Step 02</div><div class="timeline-content"><h4>Validation & Cleaning</h4><p>Sistem memeriksa field minimum, merapikan format, dan memisahkan data yang perlu review manual.</p></div></div>
+        <div class="timeline-item"><div class="timeline-step">Step 03</div><div class="timeline-content"><h4>Master Formation</h4><p>Creator di-link ke affiliator existing atau dibuat sebagai master baru, lalu dilengkapi akun, contact, tag, dan qualification.</p></div></div>
+      </div>
+      <div class="footer-links"><a class="button-link" href="../index.html">Kembali ke Overview</a><a class="button-link primary" href="outreach.html">Lanjut ke Outreach</a></div>
+    </main>
+  </div>
+  <script src="../assets/js/app.js"></script>
+</body>
+</html>
