@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BRD - Affiliate Dashboard (Adiboga)</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #475569;
+      --line: #e2e8f0;
+      --accent: #2563eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 32px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+    }
+    h1, h2, h3, h4 {
+      line-height: 1.25;
+      margin-top: 1.6em;
+      margin-bottom: 0.6em;
+    }
+    h1 { margin-top: 0; font-size: 34px; }
+    h2 { font-size: 26px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+    h3 { font-size: 20px; }
+    h4 { font-size: 17px; }
+    p, li { color: var(--text); }
+    ul, ol { padding-left: 22px; }
+    .meta {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .note {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e3a8a;
+      padding: 14px 16px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+    strong { color: #020617; }
+    code {
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-size: 0.95em;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>BRD — Affiliate Dashboard (Adiboga)</h1>
+      <p class="meta">Versi awal Business Requirements Document untuk perancangan sistem affiliate marketing end-to-end.</p>
+
+      <h2>1. Ringkasan Eksekutif</h2>
+      <p>Affiliate Dashboard (Adiboga) adalah sistem end-to-end untuk mengelola proses affiliate marketing dari tahap sourcing affiliator sampai reporting performa campaign. Sistem ini dirancang agar brand dapat menjalankan workflow yang lebih terstruktur, terukur, dan scalable, tanpa bergantung penuh pada tracking manual di spreadsheet atau chat.</p>
+      <p>Flow bisnis utama yang saat ini sudah teridentifikasi:</p>
+      <ol>
+        <li>Mencari affiliator sesuai spek dari Kalodata</li>
+        <li>Menyusun listing data affiliator</li>
+        <li>Melakukan approach ke affiliator dengan kombinasi AI dan human</li>
+        <li>Affiliator login ke portal</li>
+        <li>Affiliator memilih SoW / campaign yang ingin diikuti</li>
+        <li>Brand memproses pengiriman sample sesuai request affiliator melalui 3PL</li>
+        <li>Setelah produk diterima, affiliator membuat konten sesuai SoW</li>
+        <li>Affiliator submit/update link posting ke portal dan mendapatkan point</li>
+        <li>Sistem meng-compile reporting dan menghitung estimasi ROI otomatis</li>
+      </ol>
+
+      <h2>2. Latar Belakang</h2>
+      <p>Proses affiliate marketing biasanya tersebar di banyak tools: sourcing di platform pihak ketiga, komunikasi via chat, tracking sample via spreadsheet, submission konten lewat form, dan reporting manual. Kondisi ini menimbulkan beberapa masalah:</p>
+      <ul>
+        <li>data affiliator tidak terpusat</li>
+        <li>sulit memantau status approach dan follow-up</li>
+        <li>sample shipment sulit ditrack end-to-end</li>
+        <li>validasi pemenuhan SoW tidak konsisten</li>
+        <li>reporting ROI lambat dan rawan bias asumsi</li>
+      </ul>
+      <p>Affiliate Dashboard dibutuhkan untuk menyatukan semua tahapan tersebut dalam satu sistem operasional yang lebih rapi.</p>
+
+      <h2>3. Tujuan Bisnis</h2>
+      <h3>3.1 Tujuan Utama</h3>
+      <ul>
+        <li>Membuat pipeline affiliate marketing yang terstruktur dari sourcing sampai reporting</li>
+        <li>Mengurangi kerja manual tim brand / marketing / ops</li>
+        <li>Mempercepat proses aktivasi affiliator</li>
+        <li>Meningkatkan visibilitas performa campaign dan kontribusi affiliator</li>
+        <li>Menyediakan dasar pengambilan keputusan berbasis data</li>
+      </ul>
+      <h3>3.2 Outcome yang Diharapkan</h3>
+      <ul>
+        <li>database affiliator terpusat dan bisa difilter</li>
+        <li>status pipeline affiliator bisa dimonitor</li>
+        <li>pengiriman sample terdokumentasi</li>
+        <li>submit link konten lebih disiplin</li>
+        <li>point/reward affiliator bisa dihitung sistematis</li>
+        <li>reporting estimasi ROI lebih cepat tersedia</li>
+      </ul>
+
+      <h2>4. Ruang Lingkup</h2>
+      <h3>4.1 In Scope</h3>
+      <ol>
+        <li><strong>Affiliate sourcing management</strong>: input/import data affiliator dari Kalodata, tagging, shortlist</li>
+        <li><strong>Affiliate listing & master data</strong>: profil affiliator, platform, kategori konten, insight, histori campaign</li>
+        <li><strong>Approach workflow</strong>: template outreach AI, assignment human, pipeline status, logging komunikasi</li>
+        <li><strong>Affiliate portal</strong>: login affiliator, dashboard, list campaign aktif, pengajuan minat</li>
+        <li><strong>SoW / campaign participation</strong>: pemilihan campaign, approval, terms & deliverable</li>
+        <li><strong>Sample fulfillment</strong>: request sample, approval, pengiriman 3PL, tracking</li>
+        <li><strong>Content submission</strong>: input/update link, submit caption/tanggal/platform, validasi</li>
+        <li><strong>Point & reward logic</strong>: point berdasarkan rule, histori point</li>
+        <li><strong>Reporting & ROI estimation</strong>: performa affiliator/campaign, estimasi ROI, export</li>
+      </ol>
+      <h3>4.2 Out of Scope (Versi Awal)</h3>
+      <ul>
+        <li>pembayaran komisi otomatis ke affiliator</li>
+        <li>integrasi finance/accounting penuh</li>
+        <li>integrasi resmi ke semua marketplace/social platform</li>
+        <li>advanced fraud detection berbasis machine learning</li>
+        <li>attribution model multi-touch yang kompleks</li>
+      </ul>
+
+      <h2>5. Stakeholder</h2>
+      <h3>5.1 Internal</h3>
+      <ul>
+        <li>Brand / Marketing Team</li>
+        <li>Affiliate Manager</li>
+        <li>CRM / Outreach Team</li>
+        <li>Operations / Fulfillment Team</li>
+        <li>Management / Decision Maker</li>
+        <li>Admin Sistem</li>
+      </ul>
+      <h3>5.2 External</h3>
+      <ul>
+        <li>Affiliator / Creator</li>
+        <li>3PL / Logistics Partner</li>
+        <li>Data provider seperti Kalodata</li>
+      </ul>
+
+      <h2>6. Aktor Sistem</h2>
+      <ol>
+        <li><strong>Admin</strong>: mengelola master data, user, rule, dan akses</li>
+        <li><strong>Affiliate Manager</strong>: mengelola shortlist affiliator, campaign, approval, monitoring performa</li>
+        <li><strong>Outreach / CRM Team</strong>: melakukan pendekatan, follow-up, dan update pipeline komunikasi</li>
+        <li><strong>Ops / Fulfillment Team</strong>: memproses request sample dan tracking pengiriman</li>
+        <li><strong>Affiliator</strong>: login portal, pilih campaign, request sample, submit link konten</li>
+        <li><strong>Management</strong>: melihat dashboard dan reporting eksekutif</li>
+      </ol>
+
+      <h2>7. Analisa Flow Bisnis</h2>
+      <h3>7.1 Flow Besar yang Sudah Diberikan</h3>
+      <ul>
+        <li>Cari affiliator sesuai spek di Kalodata</li>
+        <li>Listing data affiliate</li>
+        <li>Affiliator di-approach dengan AI + human</li>
+        <li>Affiliator login portal</li>
+        <li>Affiliator pilih SoW yang ingin diikuti</li>
+        <li>Brand kirim sample via 3PL</li>
+        <li>Affiliator buat konten sesuai SoW</li>
+        <li>Affiliator update link posting dan dapat point</li>
+        <li>Sistem compile reporting dan estimasi ROI</li>
+      </ul>
+      <div class="note">Catatan penting: ROI versi awal harus diperlakukan sebagai <strong>estimasi ROI</strong>, bukan actual audited ROI, kecuali nanti sudah ada closed-loop attribution yang valid.</div>
+      <h3>7.2 Analisa Operasional</h3>
+      <h4>A. Sourcing</h4>
+      <ul>
+        <li>spek affiliator ditentukan berdasarkan follower, niche, engagement, lokasi, platform, audience fit</li>
+        <li>perlu diputuskan apakah data masuk via manual, CSV import, atau API</li>
+        <li>perlu handling untuk multi-account creator</li>
+      </ul>
+      <h4>B. Listing & Qualification</h4>
+      <ul>
+        <li>status yang disarankan: new lead, shortlisted, contacted, interested, approved, active, inactive, blacklisted</li>
+      </ul>
+      <h4>C. Outreach</h4>
+      <ul>
+        <li>AI untuk drafting/personalization</li>
+        <li>human untuk review, kirim, dan follow-up</li>
+      </ul>
+      <h4>D. Portal Affiliator</h4>
+      <ul>
+        <li>perlu keputusan apakah affiliator hanya lihat campaign undangan atau semua campaign terbuka</li>
+      </ul>
+      <h4>E. SoW / Campaign</h4>
+      <ul>
+        <li>harus jelas: deliverable, deadline, kuota, kategori, syarat sample, aturan point</li>
+      </ul>
+      <h4>F. Sample Fulfillment</h4>
+      <ul>
+        <li>status penting: requested, approved, prepared, shipped, delivered, failed/returned</li>
+      </ul>
+      <h4>G. Content Submission</h4>
+      <ul>
+        <li>validasi link, platform, tanggal tayang, status review, kesesuaian dengan SoW</li>
+      </ul>
+      <h4>H. Point & Reward</h4>
+      <ul>
+        <li>rule point harus jelas: berdasarkan submit, approval, atau performa</li>
+      </ul>
+      <h4>I. Reporting & ROI</h4>
+      <ul>
+        <li>harus dibedakan antara <strong>actual performance data</strong> dan <strong>estimated performance / estimated ROI</strong></li>
+      </ul>
+
+      <h2>8. Kebutuhan Fungsional</h2>
+      <ul>
+        <li>Modul Sourcing Affiliator</li>
+        <li>Modul Affiliate Master Listing</li>
+        <li>Modul Outreach Pipeline</li>
+        <li>Modul Campaign / SoW</li>
+        <li>Modul Portal Affiliator</li>
+        <li>Modul Sample Fulfillment</li>
+        <li>Modul Content Submission</li>
+        <li>Modul Point System</li>
+        <li>Modul Reporting</li>
+      </ul>
+
+      <h2>9. Kebutuhan Non-Fungsional</h2>
+      <ul>
+        <li>role-based access control</li>
+        <li>audit trail untuk perubahan status penting</li>
+        <li>export CSV/Excel</li>
+        <li>responsive untuk operasional desktop</li>
+        <li>siap dikembangkan ke integrasi API</li>
+        <li>mampu menangani volume data menengah-besar</li>
+      </ul>
+
+      <h2>10. User Stories</h2>
+      <ol>
+        <li>Affiliate Manager ingin import data affiliator dari Kalodata</li>
+        <li>Outreach Team ingin melihat status approach tiap affiliator</li>
+        <li>Outreach Team ingin draft pesan dari AI</li>
+        <li>Affiliator ingin login ke portal</li>
+        <li>Affiliator ingin memilih SoW yang ingin diikuti</li>
+        <li>Ops Team ingin melihat request sample</li>
+        <li>Ops Team ingin input tracking 3PL</li>
+        <li>Affiliator ingin submit link posting</li>
+        <li>Sistem menghitung point affiliator berdasarkan rule campaign</li>
+        <li>Management ingin melihat estimasi ROI per campaign</li>
+      </ol>
+
+      <h2>11. KPI dan Success Metrics</h2>
+      <h3>11.1 KPI Operasional</h3>
+      <ul>
+        <li>jumlah affiliator sourced per periode</li>
+        <li>conversion rate sourced ke contacted</li>
+        <li>conversion rate contacted ke activated</li>
+        <li>turnaround time interest ke sample shipped</li>
+        <li>turnaround time sample delivered ke content submitted</li>
+      </ul>
+      <h3>11.2 KPI Campaign</h3>
+      <ul>
+        <li>jumlah affiliator aktif per campaign</li>
+        <li>jumlah submission per campaign</li>
+        <li>on-time submission rate</li>
+        <li>total point issued</li>
+      </ul>
+      <h3>11.3 KPI Bisnis</h3>
+      <ul>
+        <li>estimated reach / impression</li>
+        <li>estimated media value</li>
+        <li>estimated NMV</li>
+        <li>estimated ROI</li>
+        <li>cost per activated affiliator</li>
+      </ul>
+
+      <h2>12. Risiko dan Catatan Penting</h2>
+      <ul>
+        <li>data Kalodata mungkin tidak selalu sinkron / lengkap</li>
+        <li>kemungkinan duplikasi affiliator</li>
+        <li>affiliator tidak responsif setelah diapproach</li>
+        <li>sample terkirim tetapi content tidak dibuat</li>
+        <li>ROI bisa bias bila asumsi CPM, cost rate, dan estimasi NMV tidak distandarkan</li>
+        <li>integrasi Kalodata / 3PL mungkin belum tersedia di fase awal</li>
+      </ul>
+
+      <h2>13. Asumsi Awal</h2>
+      <ol>
+        <li>Data affiliator awal berasal dari Kalodata</li>
+        <li>Versi awal boleh pakai import/manual upload jika API belum tersedia</li>
+        <li>Approach dilakukan oleh tim internal dengan bantuan AI untuk drafting/personalization</li>
+        <li>Affiliator memiliki akun portal sendiri</li>
+        <li>Sample fulfillment dapat dijalankan semi-manual dulu dengan input resi manual</li>
+        <li>ROI fase awal adalah <strong>estimasi ROI</strong>, bukan full audited ROI</li>
+      </ol>
+
+      <h2>14. Rekomendasi Struktur Modul Sistem</h2>
+      <ol>
+        <li>Lead Sourcing Module</li>
+        <li>Affiliate CRM / Pipeline Module</li>
+        <li>Campaign & SoW Module</li>
+        <li>Affiliate Portal Module</li>
+        <li>Sample Fulfillment Module</li>
+        <li>Content Submission Module</li>
+        <li>Point & Reward Module</li>
+        <li>Analytics & Reporting Module</li>
+      </ol>
+
+      <h2>15. Prioritas MVP yang Disarankan</h2>
+      <h3>Phase 1 — Operational Foundation</h3>
+      <ul>
+        <li>import affiliator</li>
+        <li>affiliate listing</li>
+        <li>outreach pipeline</li>
+        <li>campaign / SoW setup</li>
+        <li>portal login basic</li>
+      </ul>
+      <h3>Phase 2 — Fulfillment & Submission</h3>
+      <ul>
+        <li>request sample</li>
+        <li>shipment tracking</li>
+        <li>content submission</li>
+        <li>approval workflow</li>
+      </ul>
+      <h3>Phase 3 — Intelligence & Reporting</h3>
+      <ul>
+        <li>point engine</li>
+        <li>ROI estimation dashboard</li>
+        <li>AI-assisted outreach enhancement</li>
+        <li>executive reporting</li>
+      </ul>
+
+      <h2>16. Keputusan Penting Sebelum Masuk Desain Sistem</h2>
+      <ol>
+        <li>definisi field data affiliator minimum</li>
+        <li>status pipeline resmi affiliator</li>
+        <li>rule point resmi</li>
+        <li>definisi SoW/campaign structure</li>
+        <li>rumus estimasi ROI yang disepakati</li>
+        <li>apakah sourcing dan 3PL fase awal manual, import, atau API</li>
+      </ol>
+
+      <h2>17. Kesimpulan</h2>
+      <p>Secara bisnis, flow yang diberikan sudah cukup solid untuk dijadikan fondasi sistem. Nilai utama Affiliate Dashboard ini ada pada kemampuannya menghubungkan proses yang biasanya tercecer menjadi satu operational pipeline yang bisa dipantau ujung ke ujung.</p>
+      <p>Titik paling penting yang harus dijaga sejak awal:</p>
+      <ul>
+        <li>standardisasi status</li>
+        <li>kualitas data affiliator</li>
+        <li>disiplin tracking sample dan submission</li>
+        <li>kejelasan bahwa ROI awal adalah estimasi</li>
+      </ul>
+      <p>Jika fondasi ini rapi, sistem bisa berkembang dari sekadar dashboard operasional menjadi mesin affiliate ops yang scalable.</p>
+    </div>
+  </div>
+</body>
+</html>
