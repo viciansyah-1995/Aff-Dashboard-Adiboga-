@@ -3,26 +3,37 @@
 ## Isi Folder
 
 ### 1. MAN-POWER.md
-Dokumen estimasi kebutuhan man power untuk membangun sistem Affiliate Dashboard.
+Dokumen estimasi kebutuhan man power dengan pendekatan **lean team + AI assistance**.
 
 **Mencakup:**
-- Struktur tim yang disarankan
-- Estimasi effort per modul (hari)
-- Total estimasi timeline
-- Estimasi budget kategori lain
+- Struktur tim lean (2 orang + AI)
+- Estimasi effort per modul dengan AI acceleration
+- Timeline MVP dan Full Phase
+- Estimasi budget kategori
 
-**Ringkasan:**
-- Total effort: **112-159 hari kerja**
-- Timeline MVP: **~4 bulan** (1 tim penuh)
-- Timeline full phase: **~5-6 bulan**
+**Ringkasan Lean Approach:**
+- Tim: **2 orang** (fullstack developers)
+- AI membantu: code generation, review, documentation
+- Total effort: **66-99 hari** (vs 112-159 hari tanpa AI)
+- Timeline MVP: **~2.5-3 bulan**
+- Budget MVP: **~38-76 juta IDR**
+
+---
+
+## Perbandingan Skema
+
+| Skema | Tim | Timeline | Budget (IDR) |
+|-------|-----|----------|--------------|
+| Full Team | 5-7 orang | 4-6 bulan | 120-200 juta+ |
+| **Lean + AI** | **2 orang** | **2.5-4.5 bulan** | **38-76 juta** |
 
 ---
 
 ## Cara Pakai
 
 1. Buka `MAN-POWER.md` untuk detail breakdown per modul.
-2. Sesuaikan dengan availability tim actual.
-3. Prioritaskan MVP scope dulu sebelum masuk full phase.
+2. Pilih pendekatan yang sesuai dengan resources available.
+3. Prioritaskan MVP scope (Phase 1-2) sebelum masuk full phase.
 4. Sinkronkan dengan stakeholder untuk ekspektasi timeline.
 
 ---
@@ -32,6 +43,6 @@ Dokumen estimasi kebutuhan man power untuk membangun sistem Affiliate Dashboard.
 Dokumen ini dibuat berdasarkan:
 - BRD yang sudah disusun
 - Data Model yang sudah ada
-- Asumsi stack Next.js + Backend (Supabase atau similar)
+- Pendekatan lean team dengan AI assistance
 
 Estimasi bisa berubah setelah technical design detail tersedia.
